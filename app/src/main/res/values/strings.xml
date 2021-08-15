@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">웰이스턴 M러닝</string>
+    <string name="recognition_label" translatable="false">음성인식 결과:</string>
+    <string name="recognition_button" translatable="false">음성인식 하기</string>
+    <string name="listen_native_button" translatable="false">원어민 듣기</string>
+    <string name="listen_my_voice_button" translatable="false">녹음 듣기</string>
+
+    <string name="https_imentor_speaking" translatable="false">멘토 스피킹 학습</string>
+
+    <string name="error_audio_error" translatable="false">error_audio_error</string>
+    <string name="error_client" translatable="false">error_client</string>
+    <string name="error_permission">원활한 스피킹 학습을 위해 음성녹음과 저장공간 권한이 필요합니다.</string>
+    <string name="error_network" translatable="false">error_network</string>
+    <string name="error_timeout" translatable="false">error_timeout</string>
+    <string name="error_no_match" translatable="false">error_no_match</string>
+    <string name="error_busy" translatable="false">error_busy</string>
+    <string name="error_server" translatable="false">error_server</string>
+    <string name="error_understand" translatable="false">error_understand</string>
+
+    <string name="recognition_status_start">음성인식이 시작됐습니다.</string>
+    <string name="recognition_status_stop">음성인식이 멈췄습니다.</string>
+    <string name="webview_url">https://www.welleastern.co.kr/onacademy/korea.html</string>
+    <string name="recognition_wait_msg">음성인식 처리중입니다. 잠시만 기다려주세요.</string>
+    <string name="transcription_request_url">https://api.speechmatics.com/v1.0/user/67806/jobs/?auth_token=ZDRkZDAwMmMtMDk5ZC00ZmZhLWEzNzMtMzFiYzhkZjFiNDJj</string>
+    <string name="transcription_result_url_front">https://api.speechmatics.com/v1.0/user/67806/jobs/</string>
+    <string name="transcription_auth_token">ZDRkZDAwMmMtMDk5ZC00ZmZhLWEzNzMtMzFiYzhkZjFiNDJj</string>
+    <string name="record_status_start">녹음이 시작됐습니다.</string>
+    <string name="record_status_stop">녹음이 멈췄습니다.</string>
+
+</resources>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.welleasern.online">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <queries>
+        <intent>
+            <action android:name="android.speech.RecognitionService" />
+        </intent>
+    </queries>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".Activities.SplashScreenActivity"
+            android:exported="true"
+            android:noHistory="true"
+            android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Activities.ZhWebviewActivity"
+            android:exported="true"
+            android:configChanges="orientation|screenSize" />
+        <activity android:name=".Activities.WebviewActivity"
+            android:exported="true"
+            android:configChanges="orientation|screenSize"/>
+        <activity
+            android:name=".Activities.SpeakingActivity"
+            android:exported="true"
+            android:parentActivityName=".Activities.ZhWebviewActivity">
+            <intent-filter android:label="@string/https_imentor_speaking">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="www.welleastern.co.kr"
+                    android:pathPrefix="/IMENTOR/speaking_mobile"
+                    android:scheme="https" />
+            </intent-filter>
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.welleasern.online.Activities.ZhWebviewActivity" />
+        </activity>
+    </application>
+
+</manifest>

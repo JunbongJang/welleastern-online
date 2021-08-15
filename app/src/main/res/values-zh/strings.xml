@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Welleastern M Learning</string>
+    <string name="recognition_status_start">Recognition Started</string>
+    <string name="recognition_status_stop">Recognition Stopped</string>
+    <string name="webview_url">https://www.welleastern.cn/chn_m/main/main.php</string>
+    <string name="error_permission">Mic and Storage Permission is required</string>
+    <string name="recognition_wait_msg">Recognition is being processed, please wait a minute.</string>
+    <string name="transcription_request_url">https://api.speechmatics.com/v1.0/user/67350/jobs/?auth_token=YTAxNmJjNjUtMDY3MS00ODA0LWFlOGItYWJiZTA2MWU2Yjk2</string>
+    <string name="transcription_auth_token">YTAxNmJjNjUtMDY3MS00ODA0LWFlOGItYWJiZTA2MWU2Yjk2</string>
+    <string name="transcription_result_url_front">https://api.speechmatics.com/v1.0/user/67350/jobs/</string>
+    <string name="record_status_start">Recorder Started</string>
+    <string name="record_status_stop">Recorder Stopped</string>
+</resources>
