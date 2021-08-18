@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.browser.customtabs.CustomTabsIntent;
 
 import com.welleasern.online.R;
 
@@ -29,15 +30,14 @@ public class SplashScreenActivity extends AppCompatActivity {
     }
 
     public void gotoWebviewActivity() {
-
+        Intent i = new Intent(this, ZhWebviewActivity.class);
+        startActivity(i);
 
 //        if (getCurrentLocale(this).getLanguage().toLowerCase().equals("zh")) {
 //            i = new Intent(this, ZhWebviewActivity.class);
 //        } else {
 //            i = new Intent(this, KoWebviewActivity.class);
 //        }
-        Intent i = new Intent(this, ZhWebviewActivity.class);
-        startActivity(i);
     }
 
     Locale getCurrentLocale(Context context){

@@ -6,11 +6,11 @@ android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "com.example.welleastern_online"
+        applicationId "com.welleasern.online"
         minSdk 16
         targetSdk 31
-        versionCode 1
-        versionName "1.0"
+        versionCode 19
+        versionName "2.3.9"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

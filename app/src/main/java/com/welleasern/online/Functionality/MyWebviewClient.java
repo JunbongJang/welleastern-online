@@ -52,10 +52,8 @@ public class MyWebviewClient extends WebViewClient{
             else if (url.indexOf("www.welleastern.co.kr/IMENTOR/") == -1 &&
                     url.indexOf("www.welleastern.co.kr/user/") == -1 &&
                     url.indexOf("www.welleastern.co.kr/onacademy/") == -1) {
-                if (view.canGoBack()) {
-                    view.goBack();
-                }
                 moveToCustomTabs(uri_obj);
+                return true;
             }
 
             return false;
@@ -73,6 +71,7 @@ public class MyWebviewClient extends WebViewClient{
         Log.i("moveToCustomTabs", "");
         CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
         CustomTabsIntent customTabsIntent = builder.build();
+//        customTabsIntent.intent.setPackage("com.android.chrome");
         customTabsIntent.launchUrl(this.mContext, parsed_url);
     }
 
