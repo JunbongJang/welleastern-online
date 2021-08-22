@@ -2,14 +2,16 @@ package com.welleasern.online.Activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.content.ServiceConnection;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.browser.customtabs.CustomTabsIntent;
+import android.util.Log;
+import android.widget.Toast;
 
-import com.welleasern.online.R;
+import androidx.appcompat.app.AppCompatActivity;
+
 
 import java.util.Locale;
 
@@ -19,6 +21,7 @@ import java.util.Locale;
  *
  * Activity that displays the splash screen briefly when app first loads
  * It decides which webview activity to load based on the user's locale.
+ * It also checks whether newer version is available at Google Play store and request update
  */
 public class SplashScreenActivity extends AppCompatActivity {
 
@@ -29,7 +32,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         gotoWebviewActivity();
     }
 
-    public void gotoWebviewActivity() {
+    private void gotoWebviewActivity() {
         Intent i = new Intent(this, ZhWebviewActivity.class);
         startActivity(i);
 
@@ -48,4 +51,5 @@ public class SplashScreenActivity extends AppCompatActivity {
             return context.getResources().getConfiguration().locale;
         }
     }
+
 }

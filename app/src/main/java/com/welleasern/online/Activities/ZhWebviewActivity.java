@@ -3,6 +3,7 @@ package com.welleasern.online.Activities;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.net.ConnectivityManager;
@@ -25,6 +26,12 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.Toast;
 
+import com.google.android.play.core.appupdate.AppUpdateInfo;
+import com.google.android.play.core.appupdate.AppUpdateManager;
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
+import com.google.android.play.core.install.model.AppUpdateType;
+import com.google.android.play.core.install.model.UpdateAvailability;
+import com.google.android.play.core.tasks.Task;
 import com.welleasern.online.Functionality.MyRecognitionListener;
 import com.welleasern.online.Functionality.MyWebAppInterface;
 import com.welleasern.online.Functionality.MyWebviewClient;
@@ -65,11 +72,16 @@ public class ZhWebviewActivity extends FragmentActivity implements KeyEvent.Call
 
     CountDownTimer transcription_request_timer;
 
+    AppUpdateManager appUpdateManager;
+    private static final int UPDATE_REQUEST_CODE = 822;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_webview);
 
+        appUpdateManager = AppUpdateManagerFactory.create(this);
+        checkAppUpdate();
         networkFragment = NetworkFragment.getInstance(getFragmentManager(),
                 this.getString(R.string.transcription_request_url));
         initWebview(savedInstanceState);
@@ -358,6 +370,15 @@ public class ZhWebviewActivity extends FragmentActivity implements KeyEvent.Call
         this.appInForegroundMode = true;
         startTimer();
         super.onResume();
+
+        // Checks that the update is not stalled during 'onResume()'.
+        // should execute this check at all entry points into the app.
+        appUpdateManager.getAppUpdateInfo().addOnSuccessListener(appUpdateInfo -> {
+            if (appUpdateInfo.updateAvailability() == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS) {
+                // If an in-app update is already running, resume the update.
+                requestAppUpdate(appUpdateInfo);
+            }
+        });
     }
 
 
@@ -399,5 +420,50 @@ public class ZhWebviewActivity extends FragmentActivity implements KeyEvent.Call
         // system behavior (probably exit the activity)
         return super.onKeyDown(keyCode, event);
     }
+
+
+    // ------------------------------------------------
+
+    // referenced https://developer.android.com/guide/playcore/in-app-updates/kotlin-java#java
+    // https://www.youtube.com/watch?v=Hks5_STaOSo
+    private void checkAppUpdate() {
+
+        // Returns an intent object that you use to check for an update.
+        Task<AppUpdateInfo> appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
+
+        // Checks that the platform will allow the specified type of update.
+        appUpdateInfoTask.addOnSuccessListener(appUpdateInfo -> {
+            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+                    && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
+
+                requestAppUpdate(appUpdateInfo);
+            }
+        });
+    }
+
+    private void requestAppUpdate(AppUpdateInfo appUpdateInfo) {
+        Toast.makeText(this, R.string.app_update_message, Toast.LENGTH_SHORT).show();
+        try {
+            appUpdateManager.startUpdateFlowForResult(
+                    // Pass the intent that is returned by 'getAppUpdateInfo()'.
+                    appUpdateInfo,
+                    AppUpdateType.IMMEDIATE,
+                    this,
+                    // Include a request code to later monitor this update request.
+                    UPDATE_REQUEST_CODE);
+        } catch (IntentSender.SendIntentException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == UPDATE_REQUEST_CODE && resultCode == RESULT_CANCELED) {  // if the update is cancelled or fails
+            // request to start the update again.
+            checkAppUpdate();
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
 
 }

@@ -11,4 +11,6 @@
     <string name="transcription_result_url_front">https://api.speechmatics.com/v1.0/user/67350/jobs/</string>
     <string name="record_status_start">Recorder Started</string>
     <string name="record_status_stop">Recorder Stopped</string>
+
+    <string name="app_update_message">Please update the app before use</string>
 </resources>
