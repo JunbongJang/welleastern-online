@@ -121,7 +121,7 @@ public class ZhWebviewActivity extends FragmentActivity implements KeyEvent.Call
                         SpeakingState.record_myvoice_trigger = false;
                         voiceRecorder.startRecording();
                     }
-                    //-----------------Voice Recognition for Speaking 3---------------------
+                    //------ Voice Recognition for I-Mentor Speaking ---------------------
                     if (SpeakingState.recognition_stop_trigger) {
                         Log.i("stopRecognition", "triggered");
                         SpeakingState.recognition_stop_trigger = false;
@@ -133,7 +133,7 @@ public class ZhWebviewActivity extends FragmentActivity implements KeyEvent.Call
                         Log.i("startRecognition", "triggered");
                         SpeakingState.recognition_start_trigger = false;
                         SpeakingState.recognition_on = true;
-                        voiceRecorder.stopRecording();
+                        voiceRecorder.stopRecording();  // recognition and recording can't run simultaneously
                         startRecognition();
                     }
                     //--------------------------------------

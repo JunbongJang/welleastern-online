@@ -12,8 +12,9 @@ import java.io.IOException;
  * Author: Junbong Jang
  * Date: 5/9/2019
  *
- * Contains functions that records the voice and play it
- * Reference is //https://developer.android.com/guide/topics/media/mediarecorder
+ * Not used since we are using Google Speech Recognition, without recording audio
+ * functions that records the voice and play it
+ * Referenced //https://developer.android.com/guide/topics/media/mediarecorder
  */
 public class VoiceRecorder {
     private MediaRecorder recorder = null;

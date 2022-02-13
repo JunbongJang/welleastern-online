@@ -28,6 +28,8 @@ import com.welleasern.online.R;
 import java.util.ArrayList;
 
 /**
+ * This activity is not used... please look at ZhWebviewActivity
+ *
  * learned from https://www.techjini.com/blog/android-speech-to-text-tutorial-part1/
  * https://stackoverflow.com/questions/4975443/is-there-a-way-to-use-the-speechrecognizer-api-directly-for-speech-input
  */

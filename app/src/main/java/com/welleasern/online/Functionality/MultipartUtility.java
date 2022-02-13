@@ -20,7 +20,8 @@ import javax.net.ssl.SSLSession;
  * Author: Junbong Jang
  * Date: 5/20/2019
  *
- * Used for sending the audio data along with other key value paris to SpeechMatics.
+ * Not used since we are using Google Speech Recognition, without recording audio
+ * Used for sending the audio data along with other key value pairs to SpeechMatics.
  */
 public class MultipartUtility {
     private HttpsURLConnection httpConn;

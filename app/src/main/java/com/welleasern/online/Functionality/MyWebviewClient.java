@@ -13,7 +13,7 @@ import androidx.browser.customtabs.CustomTabsIntent;
  * Author: Junbong Jang
  * Date: 5/5/2019
  *
- * Prevents the webview to go to urls not owned by WellEastern Inc.
+ * Prevents the webview from going to urls not owned by WellEastern Inc.
  */
 public class MyWebviewClient extends WebViewClient{
 
@@ -38,20 +38,32 @@ public class MyWebviewClient extends WebViewClient{
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
         Log.i("Override Url", url);
         Uri uri_obj = Uri.parse(url);
-        if (this.checkValidHost(uri_obj.getHost())) {  // This is my website, so do not override; let my WebView load the page
+        if (this.checkValidHost(uri_obj.getHost())) {  // If Url is in my domain, do not override and let my WebView load the url
 
             // check if it is a speaking exercise
             if (url.indexOf("/IMENTOR/cn/speaking") > 0) {
                 String new_url =  "https://www.welleastern.co.kr/IMENTOR/cn/speaking_android/index.php?" + uri_obj.getQuery();
                 view.loadUrl(new_url);
             }
-            else if (url.indexOf("/IMENTOR/speaking") > 0) { // if it is speaking exercise
+            else if (url.indexOf("/IMENTOR/speaking") > 0) {
                 String new_url =  "https://www.welleastern.co.kr/IMENTOR/speaking_android/index.php?" + uri_obj.getQuery();
                 view.loadUrl(new_url);
             }
+
+//            else if (url.indexOf("/newSay/sub_study") > 0) {
+//                int an_index = url.indexOf("/newSay/sub_study") + url.length();
+//                String study_num = url.substring(an_index, an_index+1);
+//                String new_url =  "https://cvst.welleastern.co.kr/newSay/sub_study" + study_num + ".html?" + uri_obj.getQuery();
+//
+//                view.loadUrl(new_url);
+//            }
+            // Note that moving the webview to custom tabs disable speech recognition features.
             else if (url.indexOf("www.welleastern.co.kr/IMENTOR/") == -1 &&
                     url.indexOf("www.welleastern.co.kr/user/") == -1 &&
-                    url.indexOf("www.welleastern.co.kr/onacademy/") == -1) {
+                    url.indexOf("www.welleastern.co.kr/onacademy/") == -1 &&
+                    url.indexOf("cvst.welleastern.co.kr/newHello/") == -1 &&
+                    url.indexOf("cvst.welleastern.co.kr/newSay/") == -1 &&
+                    url.indexOf("www.welleastern.co.kr/mypage/") == -1) {
                 moveToCustomTabs(uri_obj);
                 return true;
             }

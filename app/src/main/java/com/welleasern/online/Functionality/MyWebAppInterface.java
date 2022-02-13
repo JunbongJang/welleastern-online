@@ -21,6 +21,7 @@ public class MyWebAppInterface {
         this.mContext = c;
     }
 
+    // ------------------- I-Mentor uses these three only ------------------------------
     /** Show a toast from the web page */
     @JavascriptInterface
     public void showToast(String toast) {
@@ -38,6 +39,7 @@ public class MyWebAppInterface {
         showToast(this.mContext.getString(R.string.recognition_status_stop));
         SpeakingState.recognition_stop_trigger = true;
     }
+    // ----------------------------------------------------
 
     @JavascriptInterface
     public void startRecording() {
